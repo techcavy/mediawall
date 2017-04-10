@@ -22,6 +22,7 @@ function createWindow() {
   });
 
   win.loadURL(`http://localhost:${port}/static/index.html`);
+  win.setFullScreen(true);
   win.on('closed', () => { win = null });
 }
 
