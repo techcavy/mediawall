@@ -18,46 +18,57 @@ class App extends Component {
       this.setState({
         img: nextId,
       });
-    }, 15000);
+    }, 5000);
   }
 
   render() {
+    const id = this.state.img;
+
+    const style = {
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center',
+      backgroundSize: 'contain',
+      position: 'absolute',
+      transition: 'opacity 2s ease-in-out, transform 2s ease-in-out',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+    }
+
     return (
-      <div className="app">
+        <div className="app" style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          overflow: 'hidden',
+          cursor: 'none',
+        }}>
         <div style={{
-          background: 'black',
+          background: '#222',
           position: 'absolute',
           top: 0,
           left: 0,
           right: 0,
           bottom: 0,
         }}/>
-        <div style={{
-          backgroundImage: `url(${`/${(this.state.img%2 ? this.state.img : (this.state.img+1))}`})`,
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center',
-          backgroundSize: 'contain',
-          position: 'absolute',
-          transition: 'opacity 200ms ease-in-out',
-          opacity: this.state.img%2 ? 1 : 0,
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-        }}/>
-        <div style={{
-          backgroundImage: `url(${`/${(this.state.img%2 ? (this.state.img+1) : this.state.img)}`})`,
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center',
-          backgroundSize: 'contain',
-          position: 'absolute',
-          transition: 'opacity 200ms ease-in-out',
-          opacity: this.state.img%2 ? 0 : 1,
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-        }}/>
+        <div style={Object.assign({}, style, {
+          backgroundImage: `url(${`/${(id%3 === 0 ? id : (id%3 === 1 ? (id-1) : (id+1)))}`})`,
+          opacity: id%3 === 0 ? 1 : 0,
+          transform: id%3 === 0 ? 'scale(0.9)' : 'scale(1.2)',
+        })}/>
+        <div style={Object.assign({}, style, {
+          backgroundImage: `url(${`/${(id%3 === 0 ? (id+1) : (id%3 === 1 ? (id) : (id-1)))}`})`,
+          opacity: id%3 === 1 ? 1 : 0,
+          transform: id%3 === 1 ? 'scale(0.9)' : 'scale(1.2)',
+        })}/>
+        <div style={Object.assign({}, style, {
+          backgroundImage: `url(${`/${(id%3 === 0 ? (id-1) : (id%3 === 1 ? (id+1) : (id)))}`})`,
+          opacity: id%3 === 2 ? 1 : 0,
+          transform: id%3 === 2 ? 'scale(0.9)' : 'scale(1.2)',
+        })}/>
      </div>
     );
   }
