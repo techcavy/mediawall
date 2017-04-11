@@ -14,10 +14,11 @@ class App extends Component {
     };
 
     setInterval(() => {
+      let nextId = this.state.img+1;
       this.setState({
-        img: this.state.img+1,
+        img: nextId,
       });
-    }, 12000);
+    }, 15000);
   }
 
   render() {
@@ -32,11 +33,26 @@ class App extends Component {
           bottom: 0,
         }}/>
         <div style={{
-          backgroundImage: `url(${`/${this.state.img}`})`,
+          backgroundImage: `url(${`/${(this.state.img%2 ? this.state.img : (this.state.img+1))}`})`,
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
           backgroundSize: 'contain',
           position: 'absolute',
+          transition: 'opacity 200ms ease-in-out',
+          opacity: this.state.img%2 ? 1 : 0,
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+        }}/>
+        <div style={{
+          backgroundImage: `url(${`/${(this.state.img%2 ? (this.state.img+1) : this.state.img)}`})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+          backgroundSize: 'contain',
+          position: 'absolute',
+          transition: 'opacity 200ms ease-in-out',
+          opacity: this.state.img%2 ? 0 : 1,
           top: 0,
           left: 0,
           right: 0,
