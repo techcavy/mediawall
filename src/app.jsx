@@ -18,7 +18,7 @@ class App extends Component {
       this.setState({
         img: nextId,
       });
-    }, 5000);
+    }, 15000);
   }
 
   render() {
