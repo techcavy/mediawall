@@ -40,5 +40,6 @@ jspm_packages
 
 
 dist
+build
 .DS_Store
 sample_data/*

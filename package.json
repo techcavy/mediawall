@@ -1,11 +1,11 @@
 {
   "name": "mediawall",
   "version": "0.0.1",
-  "description": "",
+  "description": "Fullscreen dynamic media gallery for displaying image slideshows",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config=./webpack.config.js -p",
+    "build": "webpack --config=./webpack.config.js -p; icon-gen -i icon.svg -o build/ -n ico=icon,icns=icon -r ; build -m",
     "build:dev": "webpack --config=./webpack.config.js --watch -d",
     "webpack:dev": "webpack-dev-server",
     "start": "electron ."
@@ -25,7 +25,9 @@
     "babel-preset-react": "^6.23.0",
     "css-loader": "^0.26.1",
     "electron": "^1.4.14",
+    "electron-builder": "^16.8.3",
     "html-webpack-plugin": "^2.26.0",
+    "icon-gen": "^1.0.7",
     "node-sass": "^4.5.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",

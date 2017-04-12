@@ -5,7 +5,7 @@ const url = require('url');
 
 server = express();
 server.use('/', require('./api'));
-server.use('/static', express.static(path.join(__dirname,'dist')));
+server.use('/static', express.static(path.join(__dirname,'web')));
 
 let port;
 let win;
