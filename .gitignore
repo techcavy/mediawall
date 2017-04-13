@@ -43,3 +43,4 @@ dist
 build
 .DS_Store
 sample_data/*
+web
