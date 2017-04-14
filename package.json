@@ -5,10 +5,19 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config=./webpack.config.js -p; icon-gen -i icon.svg -o build/ -n ico=icon,icns=icon -r ; build -m",
+    "build:prep": "webpack --config=./webpack.config.js -p; icon-gen -i icon.svg -o build/ -n ico=icon,icns=icon -r;",
+    "build:mac": "npm run build:prep && build -m",
+    "build:linux": "npm run build:prep && build -l",
+    "build:win": "npm run build:prep && build -w",
+    "build:all": "npm run build:prep && build -mlw",
     "build:dev": "webpack --config=./webpack.config.js --watch -d",
     "webpack:dev": "webpack-dev-server",
     "start": "electron ."
+  },
+  "build": {
+    "linux": {
+      "icon": "./build"
+    }
   },
   "author": "James Raymond",
   "license": "MIT",
