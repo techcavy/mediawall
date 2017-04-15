@@ -10,8 +10,6 @@ const ls = (dir) => new Promise((resolve, reject) => {
   });
 });
 
-console.log(config.mediaDir);
-
 app.get('/:index', (req, res) => {
   let files = ls(config.mediaDir)
     .then((files) => {
