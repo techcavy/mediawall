@@ -1,19 +1,32 @@
 const path = require('path');
 const fs = require('fs');
 const app = module.exports = require('express')();
+const config = require('../config.js');
 
+const ls = (dir) => new Promise((resolve, reject) => {
+  fs.readdir(dir, (err, list) => {
+    if (err) return reject(err);
+    resolve(list);
+  });
+});
 
+console.log(config.mediaDir);
 
 app.get('/:index', (req, res) => {
-  let files = fs.readdirSync(path.resolve(__dirname, '../sample_data/'));
-  files = files.filter((file) => {
-    if (file[0] === '.') {
-      return false;
-    }
-    if (file.match(/\.(jpe?g|png|svg|gif|bmp)$/i)) {
-      return true;
-    }
-    return false;
-  })
-  res.sendFile(path.resolve(__dirname, '../sample_data', files[req.params.index%files.length]));
+  let files = ls(config.mediaDir)
+    .then((files) => {
+      let theseFiles = files.filter((file) => {
+        if (file[0] === '.') {
+          return false;
+        }
+        if (file.match(/\.(jpe?g|png|svg|gif|bmp)$/i)) {
+          return true;
+        }
+        return false;
+      });
+      res.sendFile(path.resolve(config.mediaDir, theseFiles[req.params.index%theseFiles.length]));
+    })
+  .catch((err) => {
+    console.log(err);
+  });
 });

@@ -49,6 +49,7 @@
     "webpack-dev-server": "^2.4.1"
   },
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "ospath": "^1.2.2"
   }
 }
