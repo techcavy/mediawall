@@ -1,19 +1,20 @@
 const path = require('path');
 const fs = require('fs');
-const app = module.exports = require('express')();
+const app = (module.exports = require('express')());
 const config = require('../config.js');
 
-const ls = (dir) => new Promise((resolve, reject) => {
-  fs.readdir(dir, (err, list) => {
-    if (err) return reject(err);
-    resolve(list);
+const ls = dir =>
+  new Promise((resolve, reject) => {
+    fs.readdir(dir, (err, list) => {
+      if (err) return reject(err);
+      resolve(list);
+    });
   });
-});
 
 app.get('/:index', (req, res) => {
   let files = ls(config.mediaDir)
-    .then((files) => {
-      let theseFiles = files.filter((file) => {
+    .then(files => {
+      let theseFiles = files.filter(file => {
         if (file[0] === '.') {
           return false;
         }
@@ -22,9 +23,14 @@ app.get('/:index', (req, res) => {
         }
         return false;
       });
-      res.sendFile(path.resolve(config.mediaDir, theseFiles[req.params.index%theseFiles.length]));
+      res.sendFile(
+        path.resolve(
+          config.mediaDir,
+          theseFiles[req.params.index % theseFiles.length]
+        )
+      );
     })
-  .catch((err) => {
-    console.log(err);
-  });
+    .catch(err => {
+      console.log(err);
+    });
 });

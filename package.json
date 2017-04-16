@@ -12,6 +12,7 @@
     "build:all": "npm run build:prep && build -mlw",
     "build:dev": "webpack --config=./webpack.config.js --watch -d",
     "webpack:dev": "webpack-dev-server",
+    "prettify": "prettier --single-quote --trailing-comma es5 --write index.js && prettier --single-quote --trailing-comma es5 --write config.js && prettier --single-quote --trailing-comma es5 --write '{api,src}/**/*.{js,jsx}'",
     "start": "electron ."
   },
   "build": {
@@ -38,6 +39,7 @@
     "html-webpack-plugin": "^2.26.0",
     "icon-gen": "^1.0.7",
     "node-sass": "^4.5.0",
+    "prettier": "^1.1.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-loader": "^2.4.0",

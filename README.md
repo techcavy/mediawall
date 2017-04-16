@@ -6,7 +6,7 @@ Currently: displays images from the `./sample_data` folder on rotation
 to get running:
 
 - `npm install`
-- `npm run build`
+- `npm run build:prep`
 - `mkdir sample_data`
 - Place some image files in the `sample_data` folder
 - `npm start`
