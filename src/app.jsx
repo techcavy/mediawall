@@ -10,19 +10,25 @@ class App extends Component {
     super(props);
     
     this.state = {
-      img: 0,
+      id: 0,
+      thisImg: 0,
+      nextImg: Math.round(Math.random()*100000),
+      prevImg: 0,
     };
 
     setInterval(() => {
-      let nextId = this.state.img+1;
+      let nextId = this.state.id+1;
       this.setState({
-        img: nextId,
+        id: nextId,
+        thisImg: this.state.nextImg,
+        prevImg: this.state.thisImg,
+        nextImg: Math.round(Math.random()*100000),
       });
     }, 15000);
   }
 
   render() {
-    const id = this.state.img;
+    const id = this.state.id;
 
     const style = {
       backgroundRepeat: 'no-repeat',
@@ -55,17 +61,17 @@ class App extends Component {
           bottom: 0,
         }}/>
         <div style={Object.assign({}, style, {
-          backgroundImage: `url(${`/${(id%3 === 0 ? id : (id%3 === 1 ? (id-1) : (id+1)))}`})`,
+          backgroundImage: `url(${`/${(id%3 === 0 ? this.state.thisImg : (id%3 === 1 ? (this.state.prevImg) : (this.state.nextImg)))}`})`,
           opacity: id%3 === 0 ? 1 : 0,
           transform: id%3 === 0 ? 'scale(0.9)' : 'scale(1.2)',
         })}/>
         <div style={Object.assign({}, style, {
-          backgroundImage: `url(${`/${(id%3 === 0 ? (id+1) : (id%3 === 1 ? (id) : (id-1)))}`})`,
+          backgroundImage: `url(${`/${(id%3 === 0 ? (this.state.nextImg) : (id%3 === 1 ? (this.state.thisImg) : (this.state.prevImg)))}`})`,
           opacity: id%3 === 1 ? 1 : 0,
           transform: id%3 === 1 ? 'scale(0.9)' : 'scale(1.2)',
         })}/>
         <div style={Object.assign({}, style, {
-          backgroundImage: `url(${`/${(id%3 === 0 ? (id-1) : (id%3 === 1 ? (id+1) : (id)))}`})`,
+          backgroundImage: `url(${`/${(id%3 === 0 ? (this.state.prevImg) : (id%3 === 1 ? (this.state.nextImg) : (this.state.thisImg)))}`})`,
           opacity: id%3 === 2 ? 1 : 0,
           transform: id%3 === 2 ? 'scale(0.9)' : 'scale(1.2)',
         })}/>
